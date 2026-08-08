@@ -1,0 +1,262 @@
+/* ==========================================================================
+   Apaisant — site stylesheet
+   "If this room were a website": warm linen, a sage wall, terracotta cushions,
+   natural wood and jute, soft diffused light. Matte, tactile, unhurried.
+   No external fonts, no third-party calls — the brand's no-tracking ethos.
+   ========================================================================== */
+
+:root {
+  /* warm neutrals — linen, paper, plaster */
+  --cream: #f5f1e8;
+  --cream-deep: #efe8da;
+  --paper: #fbf8f1;      /* raised card, lighter than the room's air */
+  --line: rgba(58, 62, 51, 0.12);
+
+  /* sage — the wall */
+  --sage: #7e9a82;
+  --sage-deep: #5b7360;
+  --sage-ink: #40583f;
+  --sage-wash: #e7ece1;
+
+  /* terracotta — the cushions (accent, used sparingly) */
+  --terra: #bd7355;
+  --terra-deep: #a25b40;
+
+  /* wood & jute — the table and rug */
+  --tan: #c7a977;
+  --wood: #9c7b52;
+
+  /* ink & text — warm charcoal-green */
+  --ink: #34382f;
+  --muted: #6b6f62;
+
+  /* soft, diffuse, warm light (never hard or glossy) */
+  --lift: 0 22px 48px -28px rgba(74, 60, 36, 0.42);
+  --lift-sm: 0 12px 28px -18px rgba(74, 60, 36, 0.36);
+
+  --font: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --max: 1080px;
+  --measure: 42rem;   /* comfortable reading width */
+  --radius: 22px;
+  --radius-lg: 34px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 18px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* faint linen tactility — barely there, keeps it low-glare */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  background:
+    radial-gradient(1200px 620px at 50% -8%, var(--sage-wash), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+}
+
+img { max-width: 100%; display: block; }
+
+h1, h2, h3 { margin: 0 0 0.5em; line-height: 1.15; font-weight: 600; letter-spacing: -0.015em; }
+h1 { font-size: clamp(2.4rem, 6vw, 3.6rem); }
+h2 { font-size: clamp(1.6rem, 3.6vw, 2.2rem); }
+h3 { font-size: 1.2rem; letter-spacing: 0; }
+p { margin: 0 0 1.1em; }
+
+a { color: var(--terra-deep); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+::selection { background: var(--sage); color: #fff; }
+:focus-visible { outline: 2px solid var(--sage-deep); outline-offset: 3px; border-radius: 6px; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+.eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.9rem;
+}
+.lede { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--muted); max-width: var(--measure); }
+
+/* ---------- header ---------- */
+.site-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 26px 28px;
+}
+.brand { display: inline-flex; align-items: center; gap: 12px; }
+.brand img { height: 40px; width: auto; }
+.brand .name { font-size: 1.35rem; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
+.site-head nav { display: flex; gap: 26px; }
+.site-head nav a { color: var(--muted); font-size: 0.98rem; }
+.site-head nav a:hover { color: var(--ink); text-decoration: none; }
+
+/* ---------- hero ---------- */
+.hero { position: relative; overflow: hidden; }
+.hero-inner { max-width: var(--max); margin: 0 auto; padding: 64px 28px 84px; }
+.hero h1 { max-width: 18ch; }
+.hero .lede { margin-top: 0.4rem; font-size: clamp(1.15rem, 2.2vw, 1.4rem); }
+/* soft arch — echoes the Apaisant mark and the room's calm curves */
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -180px;
+  top: -120px;
+  width: 520px;
+  height: 520px;
+  border: 46px solid var(--sage);
+  border-radius: 50%;
+  opacity: 0.10;
+  pointer-events: none;
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.btn:hover { text-decoration: none; transform: translateY(-1px); }
+.btn-primary { background: var(--terra); color: #fff; box-shadow: var(--lift-sm); }
+.btn-primary:hover { background: var(--terra-deep); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-ghost:hover { background: var(--paper); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 2rem; }
+
+/* ---------- sections ---------- */
+.section { padding: 72px 0; }
+.section-sage {
+  background: var(--sage-deep);
+  color: #f3f1e9;
+  border-radius: var(--radius-lg);
+  margin: 0 auto;
+  max-width: calc(var(--max) - 8px);
+}
+.section-sage .eyebrow { color: rgba(255,255,255,0.72); }
+.section-sage h2 { color: #fff; }
+.section-sage a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- app card (QuietSkies) ---------- */
+.app-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 28px;
+  align-items: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 34px;
+  box-shadow: var(--lift);
+}
+.app-card .icon {
+  width: 112px; height: 112px; border-radius: 26px;
+  box-shadow: var(--lift-sm);
+}
+.app-card h3 { font-size: 1.5rem; margin-bottom: 0.3rem; letter-spacing: -0.01em; }
+.app-card p { margin-bottom: 0.8rem; color: var(--muted); }
+.pill {
+  display: inline-block; font-size: 0.76rem; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--sage-ink);
+  background: var(--sage-wash); border-radius: 999px; padding: 4px 12px; margin-bottom: 0.7rem;
+}
+
+/* calm values — soft rounded, dimensional cards with a circular icon badge,
+   in the earthy palette from the mood boards (sage / clay / oak) */
+.card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 2.4rem; }
+.card {
+  border-radius: var(--radius-lg);
+  padding: 30px 28px 32px;
+  box-shadow: var(--lift);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  position: relative;
+}
+.card h3 { margin: 0.2rem 0 0.5rem; font-size: 1.22rem; }
+.card p { margin: 0; font-size: 0.98rem; }
+.card .badge {
+  width: 54px; height: 54px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: var(--lift-sm);
+  margin-bottom: 16px;
+}
+.card .badge svg { width: 26px; height: 26px; }
+
+/* earthy variants — sage wall, clay cushion, oak table */
+.card--sage { background: linear-gradient(160deg, #869f88, #6f8a73); color: #f4f2ea; }
+.card--clay { background: linear-gradient(160deg, #c08063, #a5603f); color: #fbf2ec; }
+.card--oak  { background: linear-gradient(160deg, #b9945f, #9c7a4e); color: #fbf5ea; }
+.card--sage .badge svg { stroke: var(--sage-ink); }
+.card--clay .badge svg { stroke: var(--terra-deep); }
+.card--oak  .badge svg { stroke: var(--wood); }
+
+/* ---------- footer ---------- */
+.site-foot {
+  margin-top: 72px;
+  background: var(--cream-deep);
+  border-top: 1px solid var(--line);
+}
+.foot-inner {
+  max-width: var(--max); margin: 0 auto; padding: 46px 28px;
+  display: flex; flex-wrap: wrap; gap: 22px 40px; align-items: flex-start; justify-content: space-between;
+}
+.foot-brand { display: inline-flex; align-items: center; gap: 10px; }
+.foot-brand img { height: 30px; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 8px 26px; }
+.foot-links a { color: var(--muted); }
+.foot-links a:hover { color: var(--ink); text-decoration: none; }
+.foot-note { width: 100%; color: var(--muted); font-size: 0.86rem; margin: 0; padding-top: 10px; }
+
+/* ---------- document pages (privacy / terms) ---------- */
+.doc { max-width: var(--measure); margin: 0 auto; padding: 20px 28px 72px; }
+.doc .back { display: inline-block; color: var(--muted); font-size: 0.92rem; margin: 8px 0 26px; }
+.doc h1 { font-size: clamp(2rem, 5vw, 2.7rem); margin-bottom: 0.2em; }
+.doc .updated { color: var(--muted); font-size: 0.92rem; margin-bottom: 2.2rem; }
+.doc h2 { font-size: 1.35rem; margin-top: 2.2rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
+.doc h2:first-of-type { border-top: 0; padding-top: 0; }
+.doc ul { padding-left: 1.2rem; }
+.doc li { margin-bottom: 0.5rem; }
+.doc strong { color: var(--ink); }
+.doc hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
+.doc .note {
+  background: var(--sage-wash); border-radius: var(--radius); padding: 16px 20px;
+  color: var(--sage-ink); font-size: 0.96rem;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 720px) {
+  body { font-size: 17px; }
+  .site-head { padding: 20px; }
+  .site-head nav { gap: 18px; }
+  .app-card { grid-template-columns: 1fr; text-align: left; padding: 26px; }
+  .app-card .icon { width: 88px; height: 88px; }
+  .values { grid-template-columns: 1fr; }
+  .section { padding: 56px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; }
+}
